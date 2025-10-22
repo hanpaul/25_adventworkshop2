@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
-import { AGENDA_ITEMS } from './constants';
-import type { AgendaItem } from './types';
-import { CalendarIcon, ClockIcon, LocationIcon, UserIcon, ArrowLeftIcon } from './components/icons';
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { AGENDA_ITEMS } from '@/constants';
+import { CalendarIcon, ClockIcon, LocationIcon, UserIcon } from '@/components/icons';
 
-const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdi9YLjmkowsle5FxYXq63Qjt4aKxUzUyQrJ_uU-bNZJScBFA/viewform?embedded=true";
-
-const Header = ({ onRegisterClick }: { onRegisterClick: () => void; }) => (
+const Header = () => (
     <header className="relative py-24 md:py-32 text-center text-white overflow-hidden">
-        <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{backgroundImage: `url(./background.png)`}}
-        ></div>
+        <Image
+            src="/background.png"
+            alt="Advent workshop banner with candles"
+            fill
+            className="object-cover"
+            quality={80}
+            priority
+        />
         <div className="absolute inset-0 bg-violet-800 opacity-80 backdrop-blur-sm"></div>
         <div className="relative z-10 container mx-auto px-4">
             <p className="text-lg md:text-xl font-sans uppercase tracking-widest text-violet-200 mb-2">Advent Workshop</p>
@@ -20,12 +23,12 @@ const Header = ({ onRegisterClick }: { onRegisterClick: () => void; }) => (
             <p className="text-xl md:text-2xl font-sans text-violet-200 mt-4">
                 대림절 워크숍: 가정을 위한 하느님의 설계
             </p>
-            <button
-                onClick={onRegisterClick}
-                className="mt-8 bg-white text-violet-700 font-bold py-3 px-8 rounded-full hover:bg-violet-100 transition-colors shadow-lg inline-block text-lg"
+            <Link
+                href="/register"
+                className="mt-16 bg-white text-violet-700 font-bold py-6 px-16 rounded-full hover:bg-violet-100 transition-colors shadow-2xl inline-block text-3xl transform hover:scale-105"
             >
                 Register Now
-            </button>
+            </Link>
         </div>
     </header>
 );
@@ -126,10 +129,12 @@ const AgendaSection = () => (
 
 const SpeakerSection = () => (
     <div className="flex flex-col md:flex-row items-center bg-white/50 backdrop-blur-sm rounded-2xl shadow-lg p-6 md:p-8 gap-8 border border-white/30">
-        <img 
-            src="./dr_navarra.png"  
-            alt="Dr. Robert Navarra" 
-            className="w-40 h-40 rounded-full object-cover shadow-md flex-shrink-0"
+        <Image 
+            src="/dr_navarra.png" 
+            alt="Dr. Robert Navarra"
+            width={160}
+            height={160}
+            className="rounded-full object-cover shadow-md flex-shrink-0"
         />
         <div>
             <p className="text-sm font-semibold uppercase text-violet-600 tracking-wider">Guest Speaker</p>
@@ -150,82 +155,62 @@ const SpeakerSection = () => (
     </div>
 );
 
-const RegistrationSection = ({ onRegisterClick }: { onRegisterClick: () => void; }) => (
+const RegistrationSection = () => (
     <div className="text-center bg-violet-700 text-white rounded-2xl p-8 md:p-12 shadow-xl">
         <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">Register Today!</h2>
         <p className="text-violet-200 max-w-2xl mx-auto mb-6 text-lg">
             Join us for this enriching experience. Click the button below to secure your spot.
         </p>
-        <button 
-            onClick={onRegisterClick}
+        <Link 
+            href="/register"
             className="bg-white text-violet-700 font-bold py-3 px-8 rounded-full hover:bg-violet-100 transition-colors shadow-lg inline-block"
         >
             Register Now
-        </button>
-    </div>
-);
-
-const RegistrationPage = ({ onBackClick }: { onBackClick: () => void; }) => (
-    <div className="bg-gradient-to-b from-violet-50 to-fuchsia-100 min-h-screen flex flex-col">
-        <header className="bg-white/80 backdrop-blur-sm shadow-md sticky top-0 z-30">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
-                    <h1 className="text-xl font-bold text-slate-800 font-serif">Workshop Registration</h1>
-                    <button 
-                        onClick={onBackClick}
-                        className="flex items-center gap-2 text-slate-600 font-semibold hover:text-violet-700 transition-colors"
-                    >
-                        <ArrowLeftIcon className="w-5 h-5" />
-                        Back to Details
-                    </button>
-                </div>
-            </div>
-        </header>
-        <main className="flex-grow flex flex-col">
-             <iframe
-                src={GOOGLE_FORM_URL}
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                marginHeight={0}
-                marginWidth={0}
-                className="flex-grow"
-                title="Registration Form"
-            >
-                Loading…
-            </iframe>
-        </main>
+        </Link>
     </div>
 );
 
 
-const App = () => {
-    const [page, setPage] = useState<'home' | 'register'>('home');
-
-    const navigateToRegister = () => setPage('register');
-    const navigateToHome = () => setPage('home');
-
-    if (page === 'register') {
-        return <RegistrationPage onBackClick={navigateToHome} />;
-    }
-
+export default function HomePage() {
     return (
-        <div className="bg-gradient-to-b from-violet-50 to-fuchsia-100 font-sans text-slate-800 min-h-screen">
-            <Header onRegisterClick={navigateToRegister} />
+        <div className="bg-gradient-to-b from-violet-50 to-fuchsia-100 text-slate-800 min-h-screen">
+            <Header />
             <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <EventDetails />
                 <div className="mt-16 space-y-16 max-w-4xl mx-auto">
                     <AboutSection />
                     <AgendaSection />
                     <SpeakerSection />
-                    <RegistrationSection onRegisterClick={navigateToRegister} />
+                    <RegistrationSection />
                 </div>
             </main>
-            <footer className="text-center py-8 text-slate-500">
-                <p>&copy; {new Date().getFullYear()} Holy Korean Martyrs Catholic Church. All rights reserved.</p>
+            <footer className="bg-white/50 border-t border-white/30 mt-16 text-slate-600">
+                <div className="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-center md:text-left">
+                        <div className="flex justify-center md:justify-start items-center gap-4">
+                            <LocationIcon className="w-10 h-10 text-violet-500 flex-shrink-0" />
+                            <div>
+                                <h4 className="font-bold text-slate-800 text-lg">Location</h4>
+                                <p>Holy Korean Martyrs Catholic Church</p>
+                                <address className="not-italic">1523 McLaughlin Ave, San Jose, CA 95122</address>
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center md:items-end gap-4">
+                            <a 
+                                href="https://www.google.com/maps/dir/?api=1&destination=Holy+Korean+Martyrs+Catholic+Church,1523+McLaughlin+Ave,San+Jose,CA+95122"
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="bg-violet-600 text-white font-bold py-3 px-6 rounded-full hover:bg-violet-700 transition-colors shadow-md text-base"
+                            >
+                                Get Directions
+                            </a>
+                        </div>
+                    </div>
+                    <p className="text-center text-sm text-slate-500 mt-8 pt-8 border-t border-slate-200">
+                        &copy; {new Date().getFullYear()} Holy Korean Martyrs Catholic Church. All rights reserved.
+                    </p>
+                </div>
             </footer>
         </div>
     );
-};
-
-export default App;
+}
