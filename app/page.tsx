@@ -4,17 +4,19 @@ import Image from 'next/image';
 import { AGENDA_ITEMS } from '@/constants';
 import { CalendarIcon, ClockIcon, LocationIcon, UserIcon } from '@/components/icons';
 
+const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdi9YLjmkowsle5FxYXq63Qjt4aKxUzUyQrJ_uU-bNZJScBFA/viewform";
+
 const Header = () => (
     <header className="relative py-24 md:py-32 text-center text-white overflow-hidden">
         <Image
             src="/background.png"
             alt="Advent workshop banner with candles"
             fill
-            className="object-cover animated-bg"
+            className="object-cover"
             quality={80}
             priority
         />
-        <div className="absolute inset-0 bg-violet-800 opacity-80 backdrop-blur-sm flicker-overlay"></div>
+        <div className="absolute inset-0 bg-violet-800 opacity-80 backdrop-blur-sm"></div>
         <div className="relative z-10 container mx-auto px-4">
             <p className="text-lg md:text-xl font-sans uppercase tracking-widest text-violet-200 mb-2">Advent Workshop</p>
             <h1 className="text-5xl md:text-7xl font-serif font-extrabold leading-tight tracking-tight">
@@ -23,12 +25,14 @@ const Header = () => (
             <p className="text-xl md:text-2xl font-sans text-violet-200 mt-4">
                 대림절 워크숍: 가정을 위한 하느님의 설계
             </p>
-            <Link
-                href="/register"
+            <a
+                href={GOOGLE_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-16 bg-white text-violet-700 font-bold py-6 px-16 rounded-full hover:bg-violet-100 transition-colors shadow-2xl inline-block text-3xl transform hover:scale-105"
             >
                 Register Now
-            </Link>
+            </a>
         </div>
     </header>
 );
@@ -161,12 +165,14 @@ const RegistrationSection = () => (
         <p className="text-violet-200 max-w-2xl mx-auto mb-6 text-lg">
             Join us for this enriching experience. Click the button below to secure your spot.
         </p>
-        <Link 
-            href="/register"
+        <a 
+            href={GOOGLE_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-white text-violet-700 font-bold py-3 px-8 rounded-full hover:bg-violet-100 transition-colors shadow-lg inline-block"
         >
             Register Now
-        </Link>
+        </a>
     </div>
 );
 
