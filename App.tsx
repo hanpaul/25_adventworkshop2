@@ -9,7 +9,7 @@ const Header = ({ onRegisterClick }: { onRegisterClick: () => void; }) => (
     <header className="relative py-24 md:py-32 text-center text-white overflow-hidden">
         <div 
             className="absolute inset-0 bg-cover bg-center"
-            style={{backgroundImage: `url(./background.png)`}}
+            style={{backgroundImage: `url(./public/background.png)`}}
         ></div>
         <div className="absolute inset-0 bg-violet-800 opacity-80 backdrop-blur-sm"></div>
         <div className="relative z-10 container mx-auto px-4">
@@ -127,7 +127,7 @@ const AgendaSection = () => (
 const SpeakerSection = () => (
     <div className="flex flex-col md:flex-row items-center bg-white/50 backdrop-blur-sm rounded-2xl shadow-lg p-6 md:p-8 gap-8 border border-white/30">
         <img 
-            src="./dr_navarra.png"  
+            src="./public/dr_navarra.png"  
             alt="Dr. Robert Navarra" 
             className="w-40 h-40 rounded-full object-cover shadow-md flex-shrink-0"
         />

@@ -10,11 +10,11 @@ const Header = () => (
             src="/background.png"
             alt="Advent workshop banner with candles"
             fill
-            className="object-cover"
+            className="object-cover animated-bg"
             quality={80}
             priority
         />
-        <div className="absolute inset-0 bg-violet-800 opacity-80 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-violet-800 opacity-80 backdrop-blur-sm flicker-overlay"></div>
         <div className="relative z-10 container mx-auto px-4">
             <p className="text-lg md:text-xl font-sans uppercase tracking-widest text-violet-200 mb-2">Advent Workshop</p>
             <h1 className="text-5xl md:text-7xl font-serif font-extrabold leading-tight tracking-tight">
